@@ -7,10 +7,14 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "studio": "npm run dev --prefix studio",
+    "studio:build": "npm run build --prefix studio",
+    "studio:deploy": "npm run deploy --prefix studio"
   },
   "dependencies": {
     "@nuxt/ui": "^4.3.0",
+    "@nuxtjs/sanity": "^1.14.1",
     "@supabase/supabase-js": "^2.99.2",
     "nuxt": "^4.3.1",
     "vue": "^3.5.30",

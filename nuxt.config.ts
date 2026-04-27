@@ -3,8 +3,18 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
   srcDir: "app/",
-  modules: ["@nuxt/ui"],
+  modules: ["@nuxt/ui", "@nuxtjs/sanity"],
+  sanity: {
+    projectId: process.env.NUXT_PUBLIC_SANITY_PROJECT_ID || "",
+    dataset: process.env.NUXT_PUBLIC_SANITY_DATASET || "production",
+    apiVersion: process.env.NUXT_PUBLIC_SANITY_API_VERSION || "2024-01-01",
+    useCdn: true,
+  },
   runtimeConfig: {
+    /** Server-only; merged over public Sanity config for API routes (private datasets). */
+    sanity: {
+      token: process.env.NUXT_SANITY_API_READ_TOKEN || "",
+    },
     public: {
       supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL,
       supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY,
