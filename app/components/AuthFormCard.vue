@@ -2,15 +2,18 @@
   <section class="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
     <UCard
       class="overflow-hidden border-default bg-linear-to-br from-neutral-950 via-primary-950 to-neutral-900 text-inverted shadow-xl dark:from-neutral-950 dark:via-primary-950 dark:to-neutral-950"
-      :ui="{ body: 'p-8' }"
-    >
+      :ui="{ body: 'p-8' }">
       <template #header>
-        <UBadge color="neutral" variant="subtle" class="border border-white/15 bg-white/10 text-inverted">
+        <UBadge
+          color="neutral"
+          variant="subtle"
+          class="border border-white/15 bg-white/10 text-inverted">
           Supabase authentication
         </UBadge>
       </template>
 
-      <h1 class="mt-2 max-w-md text-3xl font-semibold tracking-tight sm:text-4xl">
+      <h1
+        class="mt-2 max-w-md text-3xl font-semibold tracking-tight sm:text-4xl">
         {{ heroTitle }}
       </h1>
       <p class="mt-4 max-w-lg text-sm leading-6 text-neutral-300">
@@ -22,11 +25,12 @@
           v-for="item in highlights"
           :key="item.label"
           class="border-white/10 bg-white/5 ring-0"
-          :ui="{ body: 'p-4' }"
-        >
+          :ui="{ body: 'p-4' }">
           <p class="text-2xl">{{ item.icon }}</p>
           <p class="mt-4 text-sm font-medium text-white">{{ item.label }}</p>
-          <p class="mt-1 text-xs leading-5 text-neutral-300">{{ item.description }}</p>
+          <p class="mt-1 text-xs leading-5 text-neutral-300">
+            {{ item.description }}
+          </p>
         </UCard>
       </div>
     </UCard>
@@ -36,16 +40,15 @@
         <div class="flex items-start justify-between gap-4">
           <div>
             <p class="text-sm font-medium text-primary">{{ eyebrow }}</p>
-            <h2 class="mt-2 text-2xl font-semibold tracking-tight text-highlighted sm:text-3xl">
+            <h2
+              class="mt-2 text-2xl font-semibold tracking-tight text-highlighted sm:text-3xl">
               {{ title }}
             </h2>
             <p class="mt-2 text-sm leading-6 text-muted">
               {{ description }}
             </p>
           </div>
-          <UBadge color="success" variant="subtle">
-            Live
-          </UBadge>
+          <UBadge color="success" variant="subtle"> Live </UBadge>
         </div>
       </template>
 
@@ -55,19 +58,20 @@
           color="success"
           variant="soft"
           :title="successMessage"
-          class="w-full"
-        />
+          class="w-full" />
 
         <UAlert
           v-if="errorMessage"
           color="error"
           variant="soft"
           :title="errorMessage"
-          class="w-full"
-        />
+          class="w-full" />
 
         <template v-if="isRegister">
-          <UFormField label="Public nickname" name="nickname" hint="3–24 characters. Shown as card creator name.">
+          <UFormField
+            label="Public nickname"
+            name="nickname"
+            hint="3–24 characters. Shown as card creator name.">
             <UInput
               id="nickname"
               v-model="form.nickname"
@@ -75,8 +79,7 @@
               autocomplete="nickname"
               maxlength="24"
               placeholder="AshKetchum"
-              class="w-full"
-            />
+              class="w-full" />
           </UFormField>
 
           <UFormField label="Avatar URL (optional)" name="avatar_url">
@@ -85,18 +88,21 @@
               v-model="form.avatar_url"
               type="url"
               placeholder="https://example.com/avatar.jpg"
-              class="w-full"
-            />
-            <div v-if="form.avatar_url.trim()" class="flex items-center gap-3 pt-2">
+              class="w-full" />
+            <div
+              v-if="form.avatar_url.trim()"
+              class="flex items-center gap-3 pt-2">
               <UAvatar
                 :src="form.avatar_url.trim()"
                 size="md"
-                class="ring ring-default"
-              />
+                class="ring ring-default" />
             </div>
           </UFormField>
 
-          <UFormField label="Short bio (optional)" name="bio" :hint="`${form.bio.length} / 500`">
+          <UFormField
+            label="Short bio (optional)"
+            name="bio"
+            :hint="`${form.bio.length} / 500`">
             <UTextarea
               id="bio"
               v-model="form.bio"
@@ -104,8 +110,7 @@
               maxlength="500"
               autoresize
               placeholder="Favourite type, region, or a one-liner…"
-              class="w-full"
-            />
+              class="w-full" />
           </UFormField>
 
           <UFormField label="Full name (optional)" name="full_name">
@@ -116,8 +121,7 @@
               autocomplete="name"
               maxlength="120"
               placeholder="Your name"
-              class="w-full"
-            />
+              class="w-full" />
           </UFormField>
 
           <UFormField label="Phone (optional)" name="phone">
@@ -128,8 +132,7 @@
               autocomplete="tel"
               maxlength="40"
               placeholder="+36 …"
-              class="w-full"
-            />
+              class="w-full" />
           </UFormField>
         </template>
 
@@ -140,8 +143,7 @@
             type="email"
             autocomplete="email"
             placeholder="trainer@example.com"
-            class="w-full"
-          />
+            class="w-full" />
         </UFormField>
 
         <UFormField label="Password" name="password">
@@ -150,18 +152,18 @@
             v-model="form.password"
             :autocomplete="isRegister ? 'new-password' : 'current-password'"
             :placeholder="passwordPlaceholder"
-            input-class="w-full"
-          />
+            input-class="w-full" />
           <div v-if="isRegister && form.password" class="mt-2 space-y-1">
             <UProgress
               :model-value="passwordStrengthPercent"
               :max="100"
               size="xs"
-              :color="passwordStrengthProgressColor"
-            />
+              :color="passwordStrengthProgressColor" />
             <p class="text-xs text-muted">
               Password strength:
-              <span class="font-medium text-default">{{ passwordStrengthLabel }}</span>
+              <span class="font-medium text-default">{{
+                passwordStrengthLabel
+              }}</span>
             </p>
           </div>
         </UFormField>
@@ -169,26 +171,27 @@
         <UFormField
           v-if="isRegister"
           label="Confirm password"
-          name="confirmPassword"
-        >
+          name="confirmPassword">
           <PasswordInputToggle
             id="confirmPassword"
             v-model="form.confirmPassword"
             autocomplete="new-password"
             placeholder="Repeat your password"
-            input-class="w-full"
-          />
+            input-class="w-full" />
         </UFormField>
 
-        <UAlert color="neutral" variant="outline" :description="helperText" class="w-full" />
+        <UAlert
+          color="neutral"
+          variant="outline"
+          :description="helperText"
+          class="w-full" />
 
         <UButton
           type="submit"
           color="primary"
           block
           :loading="loading"
-          :disabled="loading"
-        >
+          :disabled="loading">
           {{ loading ? loadingLabel : submitLabel }}
         </UButton>
       </form>
@@ -200,8 +203,7 @@
               variant="link"
               color="primary"
               to="/forgot-password"
-              class="p-0 align-baseline"
-            >
+              class="p-0 align-baseline">
               Forgot password?
             </UButton>
           </p>
@@ -211,8 +213,7 @@
               variant="link"
               color="primary"
               :to="alternateLink"
-              class="p-0 align-baseline"
-            >
+              class="p-0 align-baseline">
               {{ alternateLabel }}
             </UButton>
           </p>
@@ -231,6 +232,7 @@ const props = defineProps<{
 
 const router = useRouter();
 const supabase = useSupabaseClient();
+const config = useRuntimeConfig();
 const loading = ref(false);
 const errorMessage = ref("");
 const successMessage = ref("");
@@ -268,7 +270,9 @@ const passwordStrengthScore = computed(() => {
   return Math.min(s, 4);
 });
 
-const passwordStrengthPercent = computed(() => passwordStrengthScore.value * 25);
+const passwordStrengthPercent = computed(
+  () => passwordStrengthScore.value * 25,
+);
 
 const passwordStrengthLabel = computed(() => {
   const labels = ["Too weak", "Weak", "OK", "Good", "Strong"];
@@ -294,7 +298,8 @@ const content = computed(() => {
     return {
       eyebrow: "Create account",
       title: "Create your trainer account.",
-      description: "Choose how you show up on cards and add optional contact details.",
+      description:
+        "Choose how you show up on cards and add optional contact details.",
       heroTitle: "Trainer onboarding.",
       heroDescription:
         "Set your nickname, optional avatar and bio, then start collecting and sharing cards.",
@@ -306,9 +311,23 @@ const content = computed(() => {
       alternateLink: "/login",
       passwordPlaceholder: "At least 8 characters recommended",
       highlights: [
-        { icon: "🎴", label: "Your cards", description: "Your nickname and avatar appear on cards you create." },
-        { icon: "✏️", label: "Your profile", description: "Adjust details whenever you like from your profile page." },
-        { icon: "✓", label: "Secure saves", description: "Saving changes asks for your password to confirm it’s you." },
+        {
+          icon: "🎴",
+          label: "Your cards",
+          description: "Your nickname and avatar appear on cards you create.",
+        },
+        {
+          icon: "✏️",
+          label: "Your profile",
+          description:
+            "Adjust details whenever you like from your profile page.",
+        },
+        {
+          icon: "✓",
+          label: "Secure saves",
+          description:
+            "Saving changes asks for your password to confirm it’s you.",
+        },
       ],
     };
   }
@@ -316,21 +335,35 @@ const content = computed(() => {
   return {
     eyebrow: "Welcome back",
     title: "Log in to manage your own cards.",
-    description: "Sign in to create cards, edit your own entries, and remove only the cards you own.",
+    description:
+      "Sign in to create cards, edit your own entries, and remove only the cards you own.",
     heroTitle: "Keep your cards, favorites, and profile in one place.",
     heroDescription:
       "Anyone can browse the collection, but logging in unlocks card creation and owner-only controls for your trainer account.",
     submitLabel: "Log in",
     loadingLabel: "Signing in...",
-    helperText: "Use the same email and password you registered with in Supabase Auth.",
+    helperText:
+      "Use the same email and password you registered with in Supabase Auth.",
     alternatePrompt: "New here?",
     alternateLabel: "Create an account",
     alternateLink: "/register",
     passwordPlaceholder: "Enter your password",
     highlights: [
-      { icon: "01", label: "Owner Controls", description: "Edit and delete buttons appear only on your cards." },
-      { icon: "02", label: "Shared Viewing", description: "Visitors can still browse every published card." },
-      { icon: "03", label: "Fast Access", description: "Your session is restored automatically in the browser." },
+      {
+        icon: "01",
+        label: "Owner Controls",
+        description: "Edit and delete buttons appear only on your cards.",
+      },
+      {
+        icon: "02",
+        label: "Shared Viewing",
+        description: "Visitors can still browse every published card.",
+      },
+      {
+        icon: "03",
+        label: "Fast Access",
+        description: "Your session is restored automatically in the browser.",
+      },
     ],
   };
 });
@@ -348,6 +381,14 @@ const alternateLabel = computed(() => content.value.alternateLabel);
 const alternateLink = computed(() => content.value.alternateLink);
 const passwordPlaceholder = computed(() => content.value.passwordPlaceholder);
 const highlights = computed(() => content.value.highlights);
+
+function signupEmailRedirectUrl(): string {
+  const configured =
+    (config.public.siteUrl as string | undefined)?.replace(/\/$/, "") ?? "";
+  const origin =
+    configured || (import.meta.client ? window.location.origin : "");
+  return `${origin}/`;
+}
 
 async function onSubmit() {
   errorMessage.value = "";
@@ -389,6 +430,7 @@ async function onSubmit() {
         email,
         password,
         options: {
+          emailRedirectTo: signupEmailRedirectUrl(),
           data: {
             nickname,
             avatar_url,
@@ -426,7 +468,9 @@ async function onSubmit() {
     await router.push("/");
   } catch (error) {
     errorMessage.value =
-      error instanceof Error ? error.message : "Authentication failed. Please try again.";
+      error instanceof Error
+        ? error.message
+        : "Authentication failed. Please try again.";
     await nextTick();
     if (import.meta.client) {
       window.scrollTo({ top: 0, behavior: "smooth" });

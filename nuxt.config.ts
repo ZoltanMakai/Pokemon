@@ -19,10 +19,11 @@ export default defineNuxtConfig({
       supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL,
       supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY,
       /**
-       * Public site origin for password-reset emails (e.g. https://yourdomain.com).
-       * If unset, the app uses `window.location.origin` when sending reset links (fine for local dev).
+       * Public site origin for auth emails (password reset, signup confirmation).
+       * If unset, the app uses `window.location.origin` when sending links (fine when the tab matches the deploy).
+       * On Netlify/Vercel, set `NUXT_PUBLIC_SITE_URL` to your live origin so SSR/build match production.
        * In Supabase Dashboard → Authentication → URL configuration, add redirect URLs:
-       * `{siteUrl}/reset-password` (and `http://localhost:3000/reset-password` for local).
+       * `{siteUrl}/`, `{siteUrl}/reset-password`, and localhost equivalents for dev.
        */
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || "",
     },
